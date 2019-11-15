@@ -49,6 +49,24 @@ export class TamponBox extends Component<TamponBoxProps, {}> {
       })
     }
 
-    return <div className="tampon-box"></div>
+    return (
+      <div className="tampon-box">
+        <img src={data.productImage} className="tampon-image"></img>
+        <div className="tampon-box-writing">
+          <p>size: {tamponInfo[0].size}</p>
+          <p>amount: 12 tampons</p>
+          <p>
+            price: {data.price} {data.currency}
+          </p>
+          {tamponInfo &&
+            tamponInfo.map((t: Tampon, i: number) => (
+              <div className="tampon-type" key={i}>
+                <p>coating: {t.coating}</p>
+                <p>amount: {t.amount}</p>
+              </div>
+            ))}
+        </div>
+      </div>
+    )
   }
 }
