@@ -12,7 +12,6 @@
 }
 
 .tampon-type {
-  border: 2px solid salmon;
   padding: 0.5rem;
   margin: 0.5rem;
 }
@@ -33,9 +32,4 @@
 }
 
 .tampon-box-writing {
-  border: 2px solid blue;
-}
-
-.tampon-svg {
-  fill: lightsteelblue;
 }
