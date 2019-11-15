@@ -44,6 +44,9 @@ export class TamponMatrix extends Component<TamponMatrixProps> {
       .attr('fill', d =>
         tampon.coating === 'none' ? 'lightsteelblue' : 'coral'
       )
+      .attr('transform', 'scale(0.07)')
+      .transition()
+      .duration(500)
       .attr('transform', (d, i) => {
         const dotsPerRow = 4
         const radius = 20
