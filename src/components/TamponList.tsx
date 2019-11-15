@@ -62,22 +62,23 @@ export class TamponList extends Component<{}, TamponListState> {
 
     return (
       <div>
-        <h1>TAMPON LIST</h1>
         <div className="filter-panel">
           <select
             name="size"
             onChange={e => this.setState({ size: e.target.value })}
+            className="select-size"
           >
-            <option>all</option>
-            <option>small</option>
-            <option>regular</option>
+            <option value="all">show all sizes</option>
+            <option value="small">show small tampons</option>
+            <option value="regular">show regular tampons</option>
           </select>
         </div>
         <div className="tampon-list">
-          {filteredData.length &&
-            filteredData.map((t, i) => (
-              <TamponBox data={t} key={i} boxIndex={i} />
-            ))}
+          {filteredData.length
+            ? filteredData.map((t, i) => (
+                <TamponBox data={t} key={i} boxIndex={i} />
+              ))
+            : null}
         </div>
       </div>
     )

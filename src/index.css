@@ -2,5 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Kulim Park', sans-serif;
-  background-image: linear-gradient(#fefce8, #fef1e8);
+
+  background: #fefce8;
+  color: rgb(0, 59, 27);
 }

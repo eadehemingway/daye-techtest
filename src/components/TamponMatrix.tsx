@@ -24,7 +24,7 @@ export class TamponMatrix extends Component<TamponMatrixProps> {
 
     const data = d3.range(0, tampon.amount)
     const svgWidth = 190
-    const svgHeight = 150
+    const svgHeight = 130
     const svg = d3
       .select(`#${tampon.coating}${boxIndex}`)
       .attr('width', svgWidth)
@@ -42,11 +42,11 @@ export class TamponMatrix extends Component<TamponMatrixProps> {
       )
 
       .attr('fill', d =>
-        tampon.coating === 'none' ? 'lightsteelblue' : 'coral'
+        tampon.coating === 'none' ? 'rgb(237, 169, 31)' : 'rgba(0, 59, 27, 0.5)'
       )
       .attr('transform', 'scale(0.07)')
       .transition()
-      .duration(500)
+      .duration(800)
       .attr('transform', (d, i) => {
         const dotsPerRow = 4
         const radius = 20
@@ -57,11 +57,12 @@ export class TamponMatrix extends Component<TamponMatrixProps> {
   }
   render() {
     const { tampon, boxIndex } = this.props
-
+    const tamponType = tampon.coating === 'none' ? 'Normal' : 'CBD '
     return (
       <div className="tampon-type">
-        <p>coating: {tampon.coating}</p>
-        <p>amount: {tampon.amount}</p>
+        <p>
+          {tampon.amount} {tamponType}
+        </p>
         <svg id={`${tampon.coating}${boxIndex}`}></svg>
       </div>
     )
