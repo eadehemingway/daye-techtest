@@ -26,7 +26,7 @@ type Tampon = {
   amount: string
 }
 
-export class TamponBox extends Component<TamponBoxProps, {}> {
+export class TamponBox extends Component<TamponBoxProps> {
   render() {
     const { data } = this.props
 
