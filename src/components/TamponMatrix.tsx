@@ -4,6 +4,7 @@ import { Tampon } from './TamponBox'
 
 type TamponMatrixProps = {
   tampon: Tampon
+  boxIndex: number
 }
 
 export class TamponMatrix extends Component<TamponMatrixProps> {
@@ -19,13 +20,13 @@ export class TamponMatrix extends Component<TamponMatrixProps> {
     return placeInRow * (radius * 2 + padding)
   }
   componentDidMount() {
-    const { tampon } = this.props
-    console.log('tampon:', tampon)
+    const { tampon, boxIndex } = this.props
+
     const data = d3.range(0, tampon.amount)
     const svgWidth = 300
     const svgHeight = 300
     const svg = d3
-      .select('svg')
+      .select(`#${tampon.coating}${boxIndex}`)
       .attr('width', svgWidth)
       .attr('height', svgHeight)
 
@@ -43,13 +44,13 @@ export class TamponMatrix extends Component<TamponMatrixProps> {
       .attr('class', 'tampon-svg')
   }
   render() {
-    const { tampon } = this.props
+    const { tampon, boxIndex } = this.props
 
     return (
       <div className="tampon-type">
         <p>coating: {tampon.coating}</p>
         <p>amount: {tampon.amount}</p>
-        <svg></svg>
+        <svg id={`${tampon.coating}${boxIndex}`}></svg>
       </div>
     )
   }

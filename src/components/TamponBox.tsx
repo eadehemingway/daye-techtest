@@ -17,6 +17,7 @@ export type TamponBoxNoXml = {
 
 type TamponBoxProps = {
   data: TamponBoxNoXml
+  boxIndex: number
 }
 
 export type Tampon = {
@@ -27,7 +28,7 @@ export type Tampon = {
 
 export class TamponBox extends Component<TamponBoxProps> {
   render() {
-    const { data } = this.props
+    const { data, boxIndex } = this.props
     let tamponInfo = data.tampon
 
     return (
@@ -41,7 +42,7 @@ export class TamponBox extends Component<TamponBoxProps> {
           </p>
           {tamponInfo &&
             tamponInfo.map((t: Tampon, i: number) => (
-              <TamponMatrix tampon={t} key={i} />
+              <TamponMatrix tampon={t} key={i} boxIndex={boxIndex} />
             ))}
         </div>
       </div>

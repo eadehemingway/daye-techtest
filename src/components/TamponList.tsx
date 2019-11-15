@@ -75,7 +75,9 @@ export class TamponList extends Component<{}, TamponListState> {
         </div>
         <div className="tampon-list">
           {filteredData.length &&
-            filteredData.map((t, i) => <TamponBox data={t} key={i} />)}
+            filteredData.map((t, i) => (
+              <TamponBox data={t} key={i} boxIndex={i} />
+            ))}
         </div>
       </div>
     )
