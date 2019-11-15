@@ -22,7 +22,7 @@ type TamponBoxProps = {
 export type Tampon = {
   size: string
   coating: string
-  amount: string
+  amount: number
 }
 
 export class TamponBox extends Component<TamponBoxProps> {
