@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { TamponBox } from './TamponBox'
 
 export class TamponList extends Component {
   state = {
@@ -16,6 +17,10 @@ export class TamponList extends Component {
     return (
       <div>
         <h1>TAMPON LIST</h1>
+        <div className="filter-panel"> </div>
+        <div className="tampon-list">
+          {data.length && data.map((t, i) => <TamponBox data={t} key={i} />)}
+        </div>
       </div>
     )
   }
