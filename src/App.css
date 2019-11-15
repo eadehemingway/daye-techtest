@@ -1,0 +1,37 @@
+.tampon-image {
+  width: 150px;
+  height: 200px;
+}
+
+.tampon-box {
+  border: 2px solid salmon;
+  min-width: 45%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  display: flex;
+}
+
+.tampon-type {
+  border: 2px solid salmon;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.tampon-list {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.filter-panel {
+  height: 300px;
+  border: 2px solid pink;
+  width: 80%;
+  margin: auto;
+}
+
+.tampon-box-writing {
+  border: 2px solid blue;
+}
