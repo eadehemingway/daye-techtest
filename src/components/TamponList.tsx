@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { TamponBox } from './TamponBox'
+import { TamponBox, TamponBoxType } from './TamponBox'
+const xml2js = require('xml2js')
 
 export type TamponBoxFromApi = {
   [key: string]: any
@@ -8,6 +9,12 @@ export type TamponBoxFromApi = {
 type TamponListState = {
   data: any[]
   size: string
+}
+
+type ParsedXmlTampons = {
+  tapons: {
+    tampon: any[]
+  }
 }
 export class TamponList extends Component<{}, TamponListState> {
   state = {
@@ -17,6 +24,7 @@ export class TamponList extends Component<{}, TamponListState> {
   componentDidMount() {
     axios.get('https://front-end-test-bvhzjr6b6a-uc.a.run.app').then(res => {
       const correctSpellingData = res.data.map((box: TamponBoxFromApi) => {
+        // make spelling of tampon correct
         const regexTampon = /ta\w+ons/
         const keys = Object.keys(box)
         const tamponKey = keys.find(k => k.match(regexTampon))
@@ -24,6 +32,20 @@ export class TamponList extends Component<{}, TamponListState> {
           const value = box[tamponKey]
           box.tampon = value
           delete box[tamponKey]
+        }
+
+        // turn xml into js
+        if (typeof box.tampon === 'string') {
+          const parser = new xml2js.Parser({ explicitArray: false })
+          parser.parseString(box.tampon, function(
+            err: Error,
+            result: ParsedXmlTampons
+          ) {
+            if (err) console.log(err)
+            let tampons = result.tapons.tampon
+            if (!Array.isArray(tampons)) tampons = [tampons]
+            box.tampon = tampons
+          })
         }
         return box
       })
@@ -33,14 +55,11 @@ export class TamponList extends Component<{}, TamponListState> {
   render() {
     const { data, size } = this.state
 
-    // const filteredData = data.filter(box => {
-    //   console.log(box)
-    //   const regexTampon = /ta\w+ons/
-    //   const keys = Object.keys(box)
-    //   const tamponKey = keys.find(k => k.match(regexTampon))
-
-    //   return true
-    // })
+    const filteredData = data.filter((box: TamponBoxType) => {
+      //   console.log(box)
+      //   box.tampon[0].size
+      return true
+    })
 
     return (
       <div>
