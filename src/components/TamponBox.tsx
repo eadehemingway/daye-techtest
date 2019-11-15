@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
 const xml2js = require('xml2js')
 
+type TamponBoxType = {
+  price: number
+  currency: string
+  productImage: string
+  tampons: Tampon[] | string
+}
+
 type TamponBoxProps = {
   data: {
     // if I specify the properties of this object causes problems when trying to access the tampon key
     // come back to...
     [key: string]: any
-    // price: number
-    // currency: string
-    // productImage: string
-    // tapons?: Tampon[] | string
-    // tampons?: Tampon[] | string
+    // TamponBox
   }
 }
 
@@ -29,13 +32,7 @@ type Tampon = {
 export class TamponBox extends Component<TamponBoxProps> {
   render() {
     const { data } = this.props
-
-    const regexTampon = /ta\w+ons/
-    const keys = Object.keys(data)
-    const tamponKey = keys.find(k => k.match(regexTampon))
-
-    let tamponInfo = tamponKey && data[tamponKey]
-
+    let tamponInfo = data.tampon
     if (typeof tamponInfo === 'string') {
       const parser = new xml2js.Parser({ explicitArray: false })
       parser.parseString(tamponInfo, function(
