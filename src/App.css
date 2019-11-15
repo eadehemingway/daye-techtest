@@ -25,7 +25,7 @@
   display: flex;
   justify-content: space-around;
   width: 70%;
-
+  max-width: 870px;
   margin: auto;
   flex-wrap: wrap;
 }
@@ -47,6 +47,7 @@
   justify-content: flex-end;
   align-items: flex-end;
   width: 70%;
+  max-width: 870px;
   margin: 3rem auto;
   border-bottom: 6px solid rgb(229, 242, 227);
 }
@@ -68,4 +69,5 @@
   font-size: 1rem;
   letter-spacing: 0.2rem;
   margin-bottom: 1rem;
+  outline-color: rgba(0, 59, 27, 0.5);
 }
