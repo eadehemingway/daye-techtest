@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-const xml2js = require('xml2js')
+import { TamponMatrix } from './TamponMatrix'
 
 export type TamponBoxType = {
   price: number
@@ -19,7 +19,7 @@ type TamponBoxProps = {
   data: TamponBoxNoXml
 }
 
-type Tampon = {
+export type Tampon = {
   size: string
   coating: string
   amount: string
@@ -41,10 +41,7 @@ export class TamponBox extends Component<TamponBoxProps> {
           </p>
           {tamponInfo &&
             tamponInfo.map((t: Tampon, i: number) => (
-              <div className="tampon-type" key={i}>
-                <p>coating: {t.coating}</p>
-                <p>amount: {t.amount}</p>
-              </div>
+              <TamponMatrix tampon={t} key={i} />
             ))}
         </div>
       </div>
