@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { TamponBox, TamponBoxType } from './TamponBox'
+import { TamponBox, TamponBoxType, TamponBoxNoXml } from './TamponBox'
 const xml2js = require('xml2js')
 
 export type TamponBoxFromApi = {
@@ -55,10 +55,9 @@ export class TamponList extends Component<{}, TamponListState> {
   render() {
     const { data, size } = this.state
 
-    const filteredData = data.filter((box: TamponBoxType) => {
-      //   console.log(box)
-      //   box.tampon[0].size
-      return true
+    const filteredData = data.filter((box: TamponBoxNoXml) => {
+      if (size === 'all') return true
+      return box.tampon[0].size === size
     })
 
     return (
@@ -75,7 +74,8 @@ export class TamponList extends Component<{}, TamponListState> {
           </select>
         </div>
         <div className="tampon-list">
-          {data.length && data.map((t, i) => <TamponBox data={t} key={i} />)}
+          {filteredData.length &&
+            filteredData.map((t, i) => <TamponBox data={t} key={i} />)}
         </div>
       </div>
     )
