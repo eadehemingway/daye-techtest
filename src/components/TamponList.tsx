@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { TamponBox, TamponBoxType, TamponBoxNoXml } from './TamponBox'
+import { TamponBox, TamponBoxType, TamponBoxNoXml, Tampon } from './TamponBox'
 const xml2js = require('xml2js')
 
 export type TamponBoxFromApi = {
   [key: string]: any
 }
 type TamponListState = {
-  data: any[]
+  data: TamponBoxType[]
   size: string
 }
 
 type ParsedXmlTampons = {
   tapons: {
-    tampon: any[]
+    tampon: Tampon[]
   }
 }
 export class TamponList extends Component<{}, TamponListState> {
@@ -65,7 +65,7 @@ export class TamponList extends Component<{}, TamponListState> {
         <div className="filter-panel">
           <select
             name="size"
-            onChange={e => this.setState({ size: e.target.value })}
+            onChange={({ target }) => this.setState({ size: target.value })}
             className="select-size"
           >
             <option value="all">show all sizes</option>
