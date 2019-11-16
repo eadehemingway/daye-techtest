@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { TamponBox, TamponBoxType, TamponBoxNoXml, Tampon } from './TamponBox'
-const xml2js = require('xml2js')
+import xml2js from 'xml2js'
 
 export type TamponBoxFromApi = {
   [key: string]: any
