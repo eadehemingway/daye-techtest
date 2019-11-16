@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import * as d3 from 'd3'
 import { Tampon } from './TamponBox'
 import styled from 'styled-components'

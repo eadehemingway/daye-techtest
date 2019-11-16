@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import axios from 'axios'
 import { TamponBox, TamponBoxType, TamponBoxNoXml, Tampon } from './TamponBox'
 import xml2js from 'xml2js'
@@ -7,10 +7,6 @@ import styled from 'styled-components'
 export type TamponBoxFromApi = {
   [key: string]: any
 }
-type TamponListState = {
-  data: TamponBoxType[]
-  size: string
-}
 
 type ParsedXmlTampons = {
   tapons: {
@@ -18,12 +14,11 @@ type ParsedXmlTampons = {
   }
 }
 
-export class TamponList extends Component<{}, TamponListState> {
-  state = {
-    data: [],
-    size: 'all'
-  }
-  componentDidMount() {
+export const TamponList = () => {
+  const [data, updateData] = useState([])
+  const [size, updateSize] = useState('all')
+
+  useEffect(() => {
     axios.get('https://front-end-test-bvhzjr6b6a-uc.a.run.app').then(res => {
       const correctSpellingData = res.data.map((box: TamponBoxFromApi) => {
         // make spelling of tampon correct
@@ -51,38 +46,36 @@ export class TamponList extends Component<{}, TamponListState> {
         }
         return box
       })
-      this.setState({ data: correctSpellingData })
+      updateData(correctSpellingData)
     })
-  }
-  render() {
-    const { data, size } = this.state
-    const filteredData = data.filter((box: TamponBoxNoXml) => {
-      if (size === 'all') return true
-      return box.tampon[0].size === size
-    })
+  }, [])
 
-    return (
-      <div>
-        <FilterPanelWrapper>
-          <SelectSizeInput
-            name="size"
-            onChange={({ target }) => this.setState({ size: target.value })}
-          >
-            <option value="all">show all sizes</option>
-            <option value="small">show small tampons</option>
-            <option value="regular">show regular tampons</option>
-          </SelectSizeInput>
-        </FilterPanelWrapper>
-        <TamponListWrapper>
-          {filteredData.length
-            ? filteredData.map((t, i) => (
-                <TamponBox data={t} key={i} boxIndex={i} />
-              ))
-            : null}
-        </TamponListWrapper>
-      </div>
-    )
-  }
+  const filteredData = data.filter((box: TamponBoxNoXml) => {
+    if (size === 'all') return true
+    return box.tampon[0].size === size
+  })
+
+  return (
+    <div>
+      <FilterPanelWrapper>
+        <SelectSizeInput
+          name="size"
+          onChange={({ target }) => updateSize(target.value)}
+        >
+          <option value="all">show all sizes</option>
+          <option value="small">show small tampons</option>
+          <option value="regular">show regular tampons</option>
+        </SelectSizeInput>
+      </FilterPanelWrapper>
+      <TamponListWrapper>
+        {filteredData.length
+          ? filteredData.map((t, i) => (
+              <TamponBox data={t} key={i} boxIndex={i} />
+            ))
+          : null}
+      </TamponListWrapper>
+    </div>
+  )
 }
 
 const TamponListWrapper = styled.div`
