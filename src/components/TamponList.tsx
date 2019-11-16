@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { TamponBox, TamponBoxType, TamponBoxNoXml, Tampon } from './TamponBox'
 import xml2js from 'xml2js'
+import styled from 'styled-components'
 
 export type TamponBoxFromApi = {
   [key: string]: any
@@ -16,6 +17,7 @@ type ParsedXmlTampons = {
     tampon: Tampon[]
   }
 }
+
 export class TamponList extends Component<{}, TamponListState> {
   state = {
     data: [],
@@ -54,7 +56,6 @@ export class TamponList extends Component<{}, TamponListState> {
   }
   render() {
     const { data, size } = this.state
-
     const filteredData = data.filter((box: TamponBoxNoXml) => {
       if (size === 'all') return true
       return box.tampon[0].size === size
@@ -62,25 +63,55 @@ export class TamponList extends Component<{}, TamponListState> {
 
     return (
       <div>
-        <div className="filter-panel">
-          <select
+        <FilterPanelWrapper>
+          <SelectSizeInput
             name="size"
             onChange={({ target }) => this.setState({ size: target.value })}
-            className="select-size"
           >
             <option value="all">show all sizes</option>
             <option value="small">show small tampons</option>
             <option value="regular">show regular tampons</option>
-          </select>
-        </div>
-        <div className="tampon-list">
+          </SelectSizeInput>
+        </FilterPanelWrapper>
+        <TamponListWrapper>
           {filteredData.length
             ? filteredData.map((t, i) => (
                 <TamponBox data={t} key={i} boxIndex={i} />
               ))
             : null}
-        </div>
+        </TamponListWrapper>
       </div>
     )
   }
 }
+
+const TamponListWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+  max-width: 870px;
+  margin: auto;
+  flex-wrap: wrap;
+`
+const FilterPanelWrapper = styled.div`
+  height: 100px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: 70%;
+  max-width: 870px;
+  margin: 3rem auto;
+  border-bottom: 6px solid rgb(229, 242, 227);
+`
+
+const SelectSizeInput = styled.select`
+  width: 300px;
+  height: 30px;
+  background: none;
+  color: rgba(0, 59, 27, 0.8);
+  border: rgba(0, 59, 27, 0.8);
+  font-size: 1rem;
+  letter-spacing: 0.2rem;
+  margin-bottom: 1rem;
+  outline-color: rgba(0, 59, 27, 0.5);
+`

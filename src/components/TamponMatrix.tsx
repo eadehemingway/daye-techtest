@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import * as d3 from 'd3'
 import { Tampon } from './TamponBox'
+import styled from 'styled-components'
 
 type TamponMatrixProps = {
   tampon: Tampon
@@ -59,12 +60,18 @@ export class TamponMatrix extends Component<TamponMatrixProps> {
     const { tampon, boxIndex } = this.props
     const tamponType = tampon.coating === 'none' ? 'Normal' : 'CBD '
     return (
-      <div className="tampon-type">
+      <MatrixWrapper>
         <p>
           {tampon.amount} {tamponType}
         </p>
         <svg id={`${tampon.coating}${boxIndex}`}></svg>
-      </div>
+      </MatrixWrapper>
     )
   }
 }
+
+const MatrixWrapper = styled.div`
+  padding: 0.5rem;
+  margin: 0 1.5rem;
+  letter-spacing: 0.2rem;
+`

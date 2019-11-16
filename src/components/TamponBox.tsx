@@ -1,5 +1,6 @@
 import React from 'react'
 import { TamponMatrix } from './TamponMatrix'
+import styled from 'styled-components'
 
 export type TamponBoxType = {
   price: number
@@ -31,23 +32,64 @@ export const TamponBox = (props: TamponBoxProps) => {
   let tamponInfo = data.tampon
 
   return (
-    <div className="tampon-box">
-      <img src={data.productImage} className="tampon-image"></img>
-      <div className="tampon-box-writing">
-        <p className="box-title">
-          <span className="box-title-size">{tamponInfo[0].size} size | </span>
-          <span className="box-title-price">
+    <TamponBoxWrapper>
+      <TamponImage src={data.productImage}></TamponImage>
+      <TamponBoxInfoWrapper>
+        <TamponBoxTitle>
+          <TamponTitleSize>{tamponInfo[0].size} size | </TamponTitleSize>
+          <TamponTitlePrice>
             {data.price} {data.currency}
-          </span>
-        </p>
+          </TamponTitlePrice>
+        </TamponBoxTitle>
 
-        <div className="matrix-container">
+        <MatrixContainer>
           {tamponInfo &&
             tamponInfo.map((t: Tampon, i: number) => (
               <TamponMatrix tampon={t} key={i} boxIndex={boxIndex} />
             ))}
-        </div>
-      </div>
-    </div>
+        </MatrixContainer>
+      </TamponBoxInfoWrapper>
+    </TamponBoxWrapper>
   )
 }
+
+const MatrixContainer = styled.div`
+  display: flex;
+`
+
+const TamponBoxWrapper = styled.div`
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  display: flex;
+  border-radius: 4px;
+  align-items: center;
+  background-image: linear-gradient(#fefce8, #fef1e8);
+`
+
+const TamponImage = styled.img`
+  width: 183px;
+  height: 200px;
+  margin-left: 2rem;
+`
+
+const TamponBoxInfoWrapper = styled.div`
+  margin-left: 6rem;
+  padding: 1rem 0;
+`
+
+const TamponBoxTitle = styled.div`
+  letter-spacing: 0.2rem;
+`
+
+const TamponTitleSize = styled.span`
+  font-weight: 700;
+  font-size: 1.5rem;
+`
+
+const TamponTitlePrice = styled.span`
+  font-weight: 50;
+  font-size: 1rem;
+  color: rgba(0, 59, 27, 0.5);
+`
