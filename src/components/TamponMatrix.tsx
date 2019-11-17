@@ -10,25 +10,6 @@ type TamponMatrixProps = {
 
 export const TamponMatrix = (props: TamponMatrixProps) => {
   const { tampon, boxIndex } = props
-  const getY2Coordinate = (
-    index: number,
-    dotsPerRow: number,
-    radius: number
-  ) => {
-    const placeInCol = Math.floor(index / dotsPerRow)
-    const padding = 5
-    return placeInCol * (padding + radius * 2)
-  }
-
-  const getX2Coordinate = (
-    index: number,
-    dotsPerRow: number,
-    radius: number
-  ) => {
-    const placeInRow = index % dotsPerRow
-    const padding = 5
-    return placeInRow * (radius * 2 + padding)
-  }
 
   useEffect(() => {
     const data = d3.range(0, tampon.amount)
@@ -57,8 +38,10 @@ export const TamponMatrix = (props: TamponMatrixProps) => {
       .attr('transform', (d, i) => {
         const dotsPerRow = 4
         const radius = 20
-        const x = getX2Coordinate(i, dotsPerRow, radius)
-        const y = getY2Coordinate(i, dotsPerRow, radius)
+        const placeInCol = Math.floor(i / dotsPerRow)
+        const placeInRow = i % dotsPerRow
+        const x = placeInRow * (radius * 2)
+        const y = placeInCol * (radius * 2)
         return 'translate(' + x + ',' + y + ') scale(0.07)'
       })
   }, [])
