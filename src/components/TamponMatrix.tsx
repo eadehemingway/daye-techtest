@@ -76,6 +76,9 @@ export const TamponMatrix = (props: TamponMatrixProps) => {
 
 const MatrixWrapper = styled.div`
   padding: 0.5rem;
-  margin: 0 1.5rem;
+  margin: 0 1rem;
   letter-spacing: 0.2rem;
+  @media (max-width: 500px) {
+    margin: 0 0.5rem;
+  }
 `

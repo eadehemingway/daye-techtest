@@ -55,6 +55,9 @@ export const TamponBox = (props: TamponBoxProps) => {
 
 const MatrixContainer = styled.div`
   display: flex;
+  @media (max-width: 500px) {
+    flex-direction: column;
+  }
 `
 
 const TamponBoxWrapper = styled.div`
@@ -72,11 +75,17 @@ const TamponImage = styled.img`
   width: 183px;
   height: 200px;
   margin-left: 2rem;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `
 
 const TamponBoxInfoWrapper = styled.div`
   margin-left: 6rem;
   padding: 1rem 0;
+  @media (max-width: 900px) {
+    margin-left: 1rem;
+  }
 `
 
 const TamponBoxTitle = styled.div`
@@ -86,10 +95,16 @@ const TamponBoxTitle = styled.div`
 const TamponTitleSize = styled.span`
   font-weight: 700;
   font-size: 1.5rem;
+  @media (max-width: 500px) {
+    font-size: 1.3rem;
+  }
 `
 
 const TamponTitlePrice = styled.span`
   font-weight: 50;
   font-size: 1rem;
   color: rgba(0, 59, 27, 0.5);
+  @media (max-width: 500px) {
+    font-size: 1.3rem;
+  }
 `

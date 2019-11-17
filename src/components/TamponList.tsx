@@ -1,6 +1,6 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { TamponBox, TamponBoxType, TamponBoxNoXml, Tampon } from './TamponBox'
+import { TamponBox, TamponBoxNoXml, Tampon } from './TamponBox'
 import xml2js from 'xml2js'
 import styled from 'styled-components'
 
@@ -56,7 +56,7 @@ export const TamponList = () => {
   })
 
   return (
-    <div>
+    <PageWrapper>
       <FilterPanelWrapper>
         <SelectSizeInput
           name="size"
@@ -74,15 +74,21 @@ export const TamponList = () => {
             ))
           : null}
       </TamponListWrapper>
-    </div>
+    </PageWrapper>
   )
 }
 
+const PageWrapper = styled.div`
+  width: 70%;
+  max-width: 870px;
+  margin: auto;
+  @media (max-width: 1150px) {
+    width: 90%;
+  }
+`
 const TamponListWrapper = styled.div`
   display: flex;
   justify-content: space-around;
-  width: 70%;
-  max-width: 870px;
   margin: auto;
   flex-wrap: wrap;
 `
@@ -91,20 +97,20 @@ const FilterPanelWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  width: 70%;
-  max-width: 870px;
   margin: 3rem auto;
   border-bottom: 6px solid rgb(229, 242, 227);
 `
 
 const SelectSizeInput = styled.select`
-  width: 300px;
+  width: 260px;
   height: 30px;
   background: none;
   color: rgba(0, 59, 27, 0.8);
-  border: rgba(0, 59, 27, 0.8);
   font-size: 1rem;
   letter-spacing: 0.2rem;
   margin-bottom: 1rem;
-  outline-color: rgba(0, 59, 27, 0.5);
+  border: 3px solid rgba(0, 59, 27, 0.5);
+  border-radius: 0
+  outline: none;
+  padding-left: 1rem;
 `
