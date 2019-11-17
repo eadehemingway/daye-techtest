@@ -81,7 +81,7 @@ const TamponImage = styled.img`
 
 const TamponBoxInfoWrapper = styled.div`
   margin-left: 6rem;
-  padding: 1rem 0;
+  padding-top: 2rem;
   @media (max-width: 900px) {
     margin-left: 1rem;
   }
@@ -89,6 +89,10 @@ const TamponBoxInfoWrapper = styled.div`
 
 const TamponBoxTitle = styled.div`
   letter-spacing: 0.2rem;
+  margin-bottom: 0.5rem;
+  @media (max-width: 500px) {
+    margin-bottom: 2rem;
+  }
 `
 
 const TamponTitleSize = styled.span`
