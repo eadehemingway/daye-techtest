@@ -3,6 +3,7 @@ import axios from 'axios'
 import { TamponBox, TamponBoxNoXml, Tampon } from './TamponBox'
 import xml2js from 'xml2js'
 import styled from 'styled-components'
+import { AnimatedList } from './AnimatedList'
 
 export type TamponBoxFromApi = {
   [key: string]: any
@@ -68,11 +69,13 @@ export const TamponList = () => {
         </SelectSizeInput>
       </FilterPanelWrapper>
       <TamponListWrapper>
-        {filteredData.length
-          ? filteredData.map((t, i) => (
-              <TamponBox data={t} key={i} boxIndex={i} />
-            ))
-          : null}
+        <AnimatedList>
+          {filteredData.length
+            ? filteredData.map((t, i) => (
+                <TamponBox data={t} key={i} boxIndex={i} />
+              ))
+            : null}
+        </AnimatedList>
       </TamponListWrapper>
     </PageWrapper>
   )
@@ -113,4 +116,7 @@ const SelectSizeInput = styled.select`
   border-radius: 0
   outline: none;
   padding-left: 1rem;
+  @media (max-width: 320px) {
+    width: 100%;
+  }
 `
